@@ -1,0 +1,184 @@
+<% over = Time.now > @paper.deadline %>
+
+<div class="paper-title">
+  <a href="/admin/papers" class="return">往期考试</a>
+  <span>\</span>
+  <span class="title-text"><%= @paper.title %></span>
+</div>
+<div class="paper-information">
+  <h2 class="paper-name"><%= @paper.title %></h2>
+  <div class="wrapper">
+    <div class="paper-status <%= over ? 'closed' : 'running' %>"><%= over ? '已结束' : '进行中' %></div>
+    <div class="paper-deadline"><%= display_time @paper.deadline %></div>
+  </div>
+</div>
+<div class="papers-list-wrapper">
+  <div class="navbar-wrapper paper-show-navbar">
+    <nav class="navbar navbar-light">    
+    </nav>
+    <div class="navbar-right">
+      <% unless over %>
+        <button class="btn close-examination" data-toggle="modal" data-target="#terminateModal">
+          <span>结束考试</span>
+          <i class="fa fa-times"></i>
+        </button>
+      <% end %>
+      <a class="btn copy-paper" href="<%= duplicate_admin_paper_url(@paper) %>">
+        <span>复制考卷</span>
+        <i class="fa fa-clipboard"></i>
+      </a>
+      <button class="btn dele-paper" data-toggle="modal" data-target="#deleteModal">
+        <span>删除考卷</span>
+        <i class="fa fa-trash-o"></i>
+      </button>
+    </div>
+  </div>
+  <div class="papers-container">
+    <div class="card-wrapper">
+      <div class="card-cell papers-card">
+        <div class="card-top">
+          <div class="card-title">
+            <div class="title-wrapper">
+              <span class="title-text"><%= @paper.title %></span>
+              <span class="title-test-type <%= over ? 'closed' : 'running' %>"><%= @paper.scale == 1 ? '小考' : '大考' %></span>
+            </div>
+            <div class="paper-status"></div>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-bottom-left">
+            <div class="questions-number">
+              <span>题目数：</span>
+              <span class="questions-number-text"><%= @problems.length %></span>
+            </div>
+            <div class="paper-total-score">
+              <span>总分：</span>
+              <span class="paper-total-score-text"><%= @paper.assigns.sum(:problem_score) %></span>
+            </div>
+            <div class="examinees-number">
+              <span>参考人数：</span>
+              <span class="examinees-number-text">
+                <%= @paper.enrolls.count %>
+              </span>
+            </div>
+            <div>
+              <span>试卷关闭时间：</span>
+              <span class="deadline"><%= display_time @paper.deadline %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-cell papers-card users-information finished">
+        <div class="card-top">
+          <div class="card-title">
+            <div class="title-wrapper">
+              <span class="title-text">已完成人数</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-bottom-information">
+          <span class="information-icon"><i class="fa fa-users"></i></span>
+          <span class="information-text finished-number">
+            <%= @paper.enrolls.where.not(hand_in_time: nil).count %>
+          </span>
+        </div>
+      </div>
+      <div class="card-cell papers-card users-information unfinished">
+        <div class="card-top">
+          <div class="card-title">
+            <div class="title-wrapper">
+              <span class="title-text">未完成人数</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-bottom-information">
+          <span class="information-icon"><i class="fa fa-user"></i></span>
+          <span class="information-text unfinished-number">
+            <%= @paper.enrolls.where(hand_in_time: nil).count %>
+          </span>
+        </div>
+      </div>
+      <% if @paper.scale == 2 %>
+        <div class="card-cell papers-card users-information failed">
+          <div class="card-top">
+            <div class="card-title">
+              <div class="title-wrapper">
+                <span class="title-text">不合格名单</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-bottom-information">
+            <span class="information-icon"><i class="fa fa-times"></i></span>
+            <span class="information-text finish-number">
+              <%= num_of_failed(@paper) %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+      <div class="card-cell papers-card users-information rank">
+        <div class="card-top">
+          <div class="card-title">
+            <div class="title-wrapper">
+              <span class="title-text"></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-bottom-information">
+          <span class="information-icon"><i class="fa fa-bar-chart"></i></span>
+          <span class="information-text finish-number">得分排名</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% @template_options = { navbar: [], navbar_title: "全部题目", nopager: true, scores: true, options: true, actions: [:show] } %>
+<%= render partial: "shared/problems", object: @problems %>
+<div class="return-papers-list">
+  <a href="/admin/papers" class="btn btn-primary">返回</a>
+</div>
+<div class="modal fade dele-modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <div class="modal-title-wrapper">
+          <h5 class="modal-title" id="deleteModalLabel">确认删除</h5>
+         </div>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <span class="body-text">试卷删除后无法恢复，是否确认删除？</span>
+       </div>
+       <div class="modal-footer">
+         <div class="footer-btn">
+           <%= link_to '确认删除', admin_paper_url(@paper), class: "btn btn-danger btn-dele", method: :delete %>
+           <button class="btn btn-secondary btn-cancel" data-dismiss="modal">取消</button>
+         </div>
+       </div>
+     </div>
+  </div>
+</div>
+<div class="modal fade dele-modal" id="terminateModal" tabindex="-1" role="dialog" aria-labelledby="terminateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <div class="modal-title-wrapper">
+          <h5 class="modal-title" id="terminateModalLabel">确认结束</h5>
+         </div>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <span class="body-text">考试结束后无法恢复，是否确认结束？</span>
+       </div>
+       <div class="modal-footer">
+         <div class="footer-btn">
+           <%= link_to '确认结束', terminate_admin_paper_url(@paper), class: "btn btn-danger btn-dele", method: :patch %>
+           <button class="btn btn-secondary btn-cancel" data-dismiss="modal">取消</button>
+         </div>
+       </div>
+     </div>
+  </div>
+</div>

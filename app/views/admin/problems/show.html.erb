@@ -1,0 +1,58 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-wrapper">
+          <h5 class="modal-title" id="showModalLabel">查看题目</h5>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="type-title-wrapper">
+          <div class="prob-type">
+            <span class="prob-type-text">题型:</span>
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radio" type="radio" class="custom-control-input" <%= 'checked="checked"' if @problem.form == 1 %> disabled>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">单选</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radio" type="radio" class="custom-control-input" <%= 'checked="checked"' if @problem.form == 2 %>  disabled>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">多选</span>
+            </label>
+          </div>
+          <div class="prob-title">
+            <span class="prob-title-text">题目:</span>
+            <span class="prob-title-content"><%= @problem.description %></span>
+          </div>
+        </div>
+        <div class="options-tag-wrapper">
+          <div class="prob-options">
+            <ol type="A">
+              <% @problem.options.each do |option| %>
+                <li>
+                  <div class="row">
+                    <span class="prob-options-content"><%= option.description %></span>
+                    <i class="fa fa-check<%= ' unchecked-right' unless option.right %>"></i>
+                  </div>
+                </li>
+              <% end %>
+            </ol>
+          </div>
+          <div class="prob-label">
+            <span class="prob-label-text">标签:</span>
+            <span class="prob-label-content"><%= tags_list(@problem, true) %></span>
+          </div>
+        </div>
+        <div class="modify-btn">
+          <button class="btn btn-warning show-to-edit" data-dismiss="modal">修改</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

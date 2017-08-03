@@ -1,0 +1,34 @@
+body {
+  font-size: 12px;
+}
+a {
+  text-decoration: none;
+  color: #000;
+
+  &:hover,
+  &:active,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+ol {
+  list-style-position: outside;
+  padding-left: 15px;
+
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-main {
+  background-color: #1d8bd8;
+  color: #fff;
+}

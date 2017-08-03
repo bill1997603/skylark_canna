@@ -1,0 +1,69 @@
+.paper-title {
+  height: 30px;
+  background-color: #9bd4de;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  margin-top: -30px;
+
+  .return {
+    color: #ff9800;
+    padding-left: 5px;
+  }
+}
+
+.paper-information {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 20px;
+  position: relative;
+  border-bottom: 2px solid #E8E8E8;
+  border-top: 2px solid #E8E8E8;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 30px;
+    background-color: #1d8bd8;
+    left: 15px;
+  }
+
+  .paper-name {
+    margin-bottom: 0;
+    margin-right: 5px;
+    margin-left: 10px;
+  }
+
+  .wrapper {
+    .paper-deadline {
+      color: #bab8ba;
+    }
+  }
+}
+
+.paper-show-navbar {
+  min-height: 55px;
+
+  .btn {
+    margin-right: 20px !important;
+  }
+
+  .btn-dele {
+    color: #fff;
+  }
+}
+
+.return-papers-list {
+  margin: 0 15px;
+  display: flex;
+  flex-direction: row-reverse;
+  color: #fff;
+  margin-top: 2rem;
+
+  a {
+    color: #fff;
+  }
+}

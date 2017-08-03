@@ -1,0 +1,217 @@
+.set-papers {
+  margin: 15px 0;
+
+  .set-prob-top {
+    text-align: left !important;
+    padding-left: 15px;
+  }
+
+  .set-papers-content {
+    height: 150px;
+    padding: 0 15px;
+
+    .dropdown-icon {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      background-color: #bababa;
+      right: 0;
+      top: 0;
+      justify-content: center;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+
+      .fa {
+        color: #fff;
+        font-size: 16px;
+      }
+
+      &.onfocus {
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    .form-control {
+      width: 300px;
+      padding: .5rem .75rem;
+      height: 36px;
+    }
+
+    .form-control[readonly] {
+      background-color: #fff;
+    }
+
+    .papers-information-wrapper {
+      display: flex;
+
+      .papers-information-left {
+        margin-right: 20px;
+      }
+    }
+
+    .papers-type {
+      display: flex;
+      width: 100%;
+      font-size: 14px;
+      margin-top: 20px;
+
+      label {
+        margin-bottom: 0;
+      }
+    }
+
+    .papers-name {
+      display: flex;
+      margin-top: 15px;
+
+      .name {
+        display: flex;
+
+        span {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .papers-user {
+      display: flex;
+      margin-top: 15px;
+      position: relative;
+
+      span {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .user-range {
+        width: 300px;
+        padding: .3rem .75rem;
+        min-height: 36px;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 6px;
+        color: #464a4c;
+        font-size: 13.6px;
+        outline: none;
+        display: flex;
+        padding-right: 36px;
+
+        &.focus {
+          border-bottom-right-radius: 0px;
+          border-bottom-left-radius: 0px;
+          border-color: #5cb3fd;
+          border-bottom-color: #fff;
+        }
+
+        .user-cell {
+          border: 1px solid #aaa;
+          margin-right: 3px;
+          border-radius: 3px;
+          padding: .2rem;
+
+          .removeuser {
+            margin-left: 2px;
+            cursor: pointer;
+          }
+
+          .cell-content {
+            font-size: 12px;
+          }
+        }
+
+        .user-overflow-text {
+          font-size: 12px;
+          align-items: flex-end;
+        }
+      }
+    }
+
+    .qualified-score {
+      display: flex;
+      margin-top: 15px;
+      min-height: 36px;
+
+      .score {
+        display: flex;
+
+        span {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+        }
+
+        .papers-score-val {
+          text-align: center;
+        }
+      }
+    }
+
+    .papers-closetime {
+      display: flex;
+      margin-top: 15px;
+      max-height: 100%;
+      position: relative;
+
+      span {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .form-control {
+        width: 272px;
+        text-align: center;
+        padding-right: 36px;
+      }
+    }
+  }
+}
+
+.papers-navbar-wrapper {
+  padding: .5rem 0;
+
+  .navbar-title {
+    display: flex;
+    align-items: center;
+    margin-left: 40%;
+
+    h3 {
+      color: #fff;
+    }
+  }
+
+  .papers-navbar {
+    margin-right: 1rem;
+    .selectType {
+      border-radius: .5rem;
+    }
+    .btn {
+      font-size: 1rem;
+      color: #464a4c;
+    }
+  }
+}
+
+#listdata {
+  .problem-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form-control {
+      width: 50px;
+      padding: .2rem 0;
+      text-align: center;
+      font-size: .85rem;
+      height: 30px;
+    }
+  }
+}
+
+.release-test {
+  text-align: right;
+  margin: 20px 0;
+  margin-right: 15px;
+}

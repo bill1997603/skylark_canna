@@ -1,0 +1,46 @@
+<h3 class="page-header">发布考试</h3>
+<div class="set-prob">
+  <div class="set-prob-top">出题方式</div>
+  <div class="set-prob-content">
+    <button class="btn btn-randomly btn-main" data-toggle="modal" data-target="#randomModal">随机出题</button>
+    <a class="btn btn-manually" id="manully_new" href="/admin/papers/new?method=manually">手动出题</a>
+  </div>
+</div>
+
+<% @template_options = { navbar: [], navbar_title: "题库", options: true, actions: [:edit, :show] } %>
+<%= render partial: "shared/problems", object: @problems %>
+
+<div class="modal fade random-questions-modal" id="randomModal" tabindex="-1" role="dialog" aria-labelledby="randomModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <div class="modal-title-wrapper">
+          <h5 class="modal-title" id="randomModalLabel">随机出题</h5>
+         </div>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <form class="modal-body-wrapper">
+         <div class="modal-body">
+           <div class="questions-type">
+             <div class="questions-type-radio">
+               <span>单选</span>
+               <input class="number-input form-control" id="single_choice" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+               <span>题</span>
+             </div>
+             <div class="questions-type-checkbox">
+               <span>多选</span>
+               <input class="number-input form-control" id="multi_choice" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
+               <span>题</span>
+             </div>
+           </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-main random-button">确认</button>
+         </div> 
+       </form>
+     </div>
+  </div>
+</div>

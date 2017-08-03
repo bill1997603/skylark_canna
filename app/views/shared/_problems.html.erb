@@ -1,0 +1,141 @@
+<% if @template_options[:wrapper_class] %>
+  <div class="<%= @template_options[:wrapper_class] %>">
+<% end %>
+
+  <% if @template_options[:navbar] %>
+    <div class="navbar-wrapper">
+      <nav class="navbar navbar-light">
+        <% if @template_options[:navbar].include? :search %>
+          <%= form_tag search_admin_problems_path, remote: true, method: :get, class: "form-inline", id: "submit-search" do %>
+            <i class="fa fa-search search"></i>
+            <%= text_field_tag :q, params[:q], class: "form-control mr-sm-2", id: "search-input", autocomplete: 'off',placeholder: "搜索题目" %>
+            <ul id="autosearch">
+            </ul>
+          <% end %>
+        <% end %>
+      </nav>
+      <% if @template_options[:navbar_title] %>
+        <div class="navbar-title">
+          <h4><%= @template_options[:navbar_title] %>
+        </div>
+      <% end %>
+      <div class="navbar-right">
+        <% if @template_options[:navbar].include? :search %>
+          <select class="custom-select mb-2 mr-sm-2 mb-sm-0 selectType" id="inlineFormCustomSelect">
+            <option value="1">单选</option>
+            <option value="2">多选</option>
+            <option value="3" selected style="display: none;">题型</option>
+          </select>
+          <button class="btn" id="labelButton">标签<i class="fa fa-tag"></i></button>
+        <% end %>
+        <% if @template_options[:navbar].include? :import %>
+          <button class="btn" data-toggle="modal" data-target="#importModal">批量导入<i class="fa fa-upload"></i></button>
+        <% end %>
+        <% if @template_options[:navbar].include? :create %>
+          <button class="btn createButton">添加<i class="fa fa-plus"></i></button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="container-wrapper">
+    <div class="container index-container">
+      <table class="table table-hover index-table">
+        <thead>
+          <tr class="tr">
+            <td>题目</td>
+            <td>题型</td>
+            <% if @template_options[:options] %>
+              <td>A</td>
+              <td>B</td>
+              <td>C</td>
+              <td>D</td>
+              <td>...</td>
+            <% end %>
+            <td>标签</td>
+            <td>操作</td>
+            <% if @template_options[:scores] %>
+              <td>分数</td>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody id="listdata">
+        <% problems.each do |problem| %>
+          <%= render partial: "shared/problem", object: problem %>
+        <% end %>
+        </tbody>
+      </table>
+      <% unless @template_options[:nopager] %>
+        <div class="problems-pagination-wrapper pagination-wrapper">
+          <%= paginate problems, remote: true %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if @template_options[:wrapper_class] %>
+    </div>
+  <% end %>
+  <% if @template_options[:navbar]&.include? :create %>
+    <div class="modal fade create-modal" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    </div>
+  <% end %>
+  <% if @template_options[:actions].include? :show %>
+    <div class="modal fade show-modal" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
+    </div>
+  <% end %>
+  <% if @template_options[:actions].include? :edit %>
+    <div class="modal fade edit-modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    </div>
+  <% end %>
+  <% if @template_options[:actions].include? :delete %>
+    <div class="modal fade dele-modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <div class="modal-title-wrapper">
+              <h5 class="modal-title" id="deleteModalLabel">确认删除</h5>
+             </div>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             <span class="body-text">题目删除后无法恢复，是否确认删除?</span>
+           </div>
+           <div class="modal-footer">
+             <div class="footer-btn">
+               <a class="btn btn-danger btn-dele" rel="nofollow" data-method="delete" data-dismiss="modal">确认删除</a>
+               <button class="btn btn-secondary btn-cancel" data-dismiss="modal">取消</button>
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+  <% end %>
+  <% if @template_options[:navbar]&.include? :import %>
+    <div class="modal fade import-modal" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= form_tag upload_admin_problems_url, multipart: true, method: :post, class: "import-form" do %>
+              <%= link_to "下载批量导入模板", template_admin_problems_path, class: "btn btn-info" %>
+              <label class="btn btn-success">
+                选择上传文件<%= file_field_tag "file", style: "display: none", id: "uploadButton" %>
+              </label>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-main" data-dismiss="modal">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if @template_options[:navbar]&.include? :search %>
+    <div class="modal fade label-modal" id="labelModal" role="dialog" aria-labelledby="labelModalLabel" aria-hidden="true">
+    </div>
+  <% end %>

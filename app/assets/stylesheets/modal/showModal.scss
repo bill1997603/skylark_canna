@@ -1,0 +1,123 @@
+.show-modal {
+  .modal-dialog {
+    max-width: 560px;
+
+    .modal-body {
+      .type-title-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding-left: 100px;
+        font-size: 14px;
+        margin-bottom: 20px;
+
+        .prob-type {
+          width: 300px;
+          margin-bottom: 10px;
+
+          .prob-type-text {
+            margin-right: 10px;
+          }
+          .custom-control {
+            align-items: center;
+          }
+          .custom-radio {
+            margin-right: 100px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+          .custom-control-description {
+            color: #000;
+          }
+        }
+
+        .prob-title {
+          display: flex;
+          width: 300px;
+
+          .prob-title-text {
+            display: inline-block;
+          }
+
+          .prob-title-content {
+            width: 250px;
+            white-space: pre-wrap;
+            word-break:break-all;
+            word-wrap:break-word;
+            margin-left: 10px;
+            max-height: 6rem;
+            overflow-y: auto;
+          }
+        }
+      }
+
+      .options-tag-wrapper {
+        padding-left: 100px;
+      }
+
+      .prob-options {
+        ol {
+          padding-left: 15px;
+
+          li {
+            margin-bottom: 20px;
+            position: relative;
+          }
+        }
+
+        .row {
+          margin-top: -18px;
+          margin-left: 20px;
+
+          .prob-options-content {
+            width: 250px;
+            white-space: pre-wrap;
+            word-break:break-all;
+            word-wrap:break-word;
+            max-height: 6rem;
+            overflow-y: auto;
+          }
+
+          .fa {
+            line-height: 18px;
+            color: green;
+            position: absolute;
+            left: -15px;
+            top: 9px;
+            font-size: 16px;
+          }
+          .unchecked-right {
+            color: transparent;
+          }
+        }
+      }
+
+      .prob-label {
+        display: flex;
+        align-items: center;
+
+        .prob-label-content {
+          width: 300px;
+          border: 1px solid #bababa;
+          border-radius: 4px;
+          white-space: pre-wrap;
+          word-break:break-all;
+          word-wrap:break-word;
+          max-height: 6rem;
+          overflow-y: auto;
+          margin-left: 10px;
+          min-height: 28px;
+          line-height: 28px;
+          padding: 0 10px;
+        }
+      }
+
+      .modify-btn {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+    }
+  }
+}

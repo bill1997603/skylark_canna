@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  pool: 64
+  timeout: 5000
+  encoding: utf-8
+
+production:
+  <<: *default
+  database: canna-production
+
+development:
+  <<: *default
+  database: canna-dev
+
+test:
+  <<: *default
+  database: canna-test

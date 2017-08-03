@@ -1,0 +1,49 @@
+<% problem = assign.problem %>
+<% if @detailed && done_wrong %>
+  <div class="paper-questions-cell problem-cell" style="background-color: #f7bebe;">
+<% else %>
+  <div class="paper-questions-cell problem-cell">
+<% end %>
+  <div class="cell-description">
+    <span><%= i + 1 %>.</span>
+    <span class="cell-title">
+      <%= problem.description %>
+    </span>
+    <span class="cell-type">
+      <span>(</span><span class="cell-type-text">
+        <%= problem.form == 1 ? '单选' : '多选' %>
+      </span><span>)</span>
+    </span>
+    <span class="cell-score">
+      <%= assign.problem_score %>
+    </span>
+    <span>分</span>
+  </div>
+  <div class="cell-options">
+    <ol type="A">
+      <% problem.options.each do |option| %>
+        <li class="option" data-id=<%= option.id %>>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <% if @detailed && chosen?(chosen_list, problem.id, option.id) %>
+                <input type="checkbox" class="custom-control-input" checked>
+              <% else %>
+                <input type="checkbox" class="custom-control-input">
+              <% end %>
+              <span class="custom-control-indicator <%= problem.form ==1 ? 'single-check' : '' %>"></span>
+              <span class="custom-control-description">
+                <%= option.description %>
+              </span>
+            </label>
+            <% if @detailed && done_wrong && option.right? %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+  <% if available %>
+    <%= hidden_field_tag "paper[assigns_attributes][#{assign.id}][chosen]","",class: "selected-options-input" %>
+  <% end %>
+</div>

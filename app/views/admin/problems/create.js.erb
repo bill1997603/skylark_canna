@@ -1,0 +1,8 @@
+<% if !@problem.errors.any? %>
+  <% @template_options = { actions: [:edit, :show, :delete], options: true, new_record: true } %>
+  new_record = "<%= j render partial: "shared/problem", object: @problem %>";
+  $('#createModal').modal('toggle');
+  canna.admin_problem.insert_new_record(new_record);
+<% else %>
+  $('.error-message').html("<%= j render partial: "shared/error_message", object: @problem.errors.full_messages %>");
+<% end %>

@@ -1,0 +1,26 @@
+.import-modal{
+  .modal-content {
+
+    .modal-header {
+      flex-direction: row-reverse;
+    }
+
+    .modal-body > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 12rem;
+
+      .btn {
+        width: 165px;
+      }
+      .btn-info {
+        color: #fff;
+      }
+      .btn-success {
+        margin-top: 2rem;
+      }
+    }
+  }
+}

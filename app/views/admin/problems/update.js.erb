@@ -1,0 +1,12 @@
+<% if !@problem.errors.any? %>
+  $('#editModal').modal('toggle');
+  var url = window.location.href;
+  $('.container-wrapper:first').load(url + " .container", function() {
+    $('.selectType').find('option[value=3]').attr('selected',true).css('display','none').siblings().css('display','block').attr('selected',false);
+    $('.selectType').find('option[value=3]').text('题型');
+    $('#labelButton').text('标签');
+    $('.tr').css('width', ($('.navbar-wrapper').width() -1) + 'px');
+  });
+<% else %>
+  $('.error-message').html("<%= j render partial: "shared/error_message", object: @problem.errors.full_messages %>");
+<% end %>

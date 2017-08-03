@@ -1,0 +1,25 @@
+.modal {
+  input[type='text'],
+  textarea {
+    width: 300px !important;
+  }
+  
+  .modal-content {
+    .modal-header {
+      .modal-title-wrapper {
+        flex: auto;
+        display: flex;
+        justify-content: center;
+
+        .modal-title {
+          font-weight: bold;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .modal-footer>:not(:last-child) {
+      margin-right: .5rem;
+    }
+  }
+}

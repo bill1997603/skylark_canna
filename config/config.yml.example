@@ -1,0 +1,28 @@
+default: &default
+
+development:
+  <<: *default
+  admin_accounts:
+    dev:
+      password: dev
+    dev2:
+      password: dev2
+
+  skylark_adapter:
+    base_url: http://beta.skylarkly.com
+    private_token: dev
+
+test:
+  <<: *default
+  admin_accounts:
+    test:
+      password: test
+
+  skylark_adapter:
+    base_url: beta.skylarkly.com
+    private_token: test
+
+production:
+  <<: *default
+  admin_accounts:
+    # production

@@ -1,0 +1,77 @@
+<div class="users-papers-container">
+  <div class="users-papers-header">
+    <div class="header-left">
+      <div class="users-papers-title">
+        <%= @paper.title %>
+      </div>
+      <div class="papers-information">
+        <div class="information-cell">
+          <span>发布者：</span>
+          <span>渠道小助手</span>
+        </div>
+        <div class="information-cell">
+          <span>考试类型：</span>
+          <span>
+            <%= @paper.scale == 1 ? '小考' : '大考' %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>题目数：</span>
+          <span>
+            <%= @paper.problems.count %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>总分：</span>
+          <span>
+            <%= @paper.assigns.sum(:problem_score) %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>试卷关闭时间：</span>
+          <span>
+            <%= display_time(@paper.deadline) %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="head-icon"><i class="fa fa-file-text-o"></i></span>
+      <% over = Time.now > @paper.deadline %>
+      <span class="papers-status <%= over ? 'closed' : 'running' %>">
+        <%= over ? '已关闭' : '进行中' %>
+      </span>
+    </div>
+  </div>
+  <% if @available %>
+    <%= form_for @paper, url: submit_users_papers_url(@paper.code),html: { id: "submit_paper" }, method: "post" do |f| %>
+      <div class="users-papers-body">
+        <% @assigns.each_with_index do |assign, i| %>
+          <%= render partial: 'assign', locals: { available: @available, assign: assign, i: i } %>
+        <% end %>
+      </div>
+      <div class="users-papers-divider"></div>
+      <div class="users-papers-footer">
+        <a class="btn btn-danger" id="submit-paper-button">
+          <i class="fa fa-check-square-o"></i>
+          <span>提交</span>
+        </a>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="users-papers-body" style="margin-bottom: 0px;">
+      <% @assigns.each_with_index do |assign, i| %>
+        <%= render partial: 'assign', locals: { available: @available, assign: assign, done_wrong: done_wrong?(@enroll.chosen_list, assign.problem.id), chosen_list: @enroll.chosen_list,
+                                                i: i } %>
+      <% end %>
+    </div>
+  <% end %>
+  <% if @detailed %>
+    <div class="users-papers-footer">
+      <a class="btn btn-danger" href="<%= users_paper_url(@paper) %>">
+        <i class="fa fa-repeat"></i>
+        <span>返回成绩</span>
+      </a>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,34 @@
+.random-questions-modal {
+  .modal-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+
+    .number-input {
+      width: 80px;
+      display: inline-block;
+      padding: .2rem .3rem;
+    }
+
+    .questions-type {
+      display: flex;
+
+      span {
+        font-size: 14px;
+      }
+
+      .form-control {
+        width: 46px;
+        height: 28px;
+        border-radius: 4px;
+        text-align: center;
+      }
+
+      .questions-type-checkbox {
+        margin-left: 50px;
+      }
+    }
+  }
+}

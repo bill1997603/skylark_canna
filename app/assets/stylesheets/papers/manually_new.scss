@@ -1,0 +1,108 @@
+.manually-new {
+  display: flex;
+
+  .flex-percentage {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .manually-problems {
+    margin: 0 15px;
+    box-shadow: 0 0 5px;
+
+    .navbar-wrapper {
+      margin: 0;
+      box-shadow: 0 0 0;
+
+      .form-inline {
+        width: 250px !important;
+      }
+
+      .form-control {
+        padding: .5rem .5rem !important;
+      }
+
+      #search-input {
+        width: 200px;
+      }
+
+      .problems-title {
+        color: #fff;
+        margin-bottom: 0;
+        margin-left: -15px;
+      }
+    }
+
+    .index-container {
+      padding: 0;
+      background-color: #fff;
+
+      .index-table {
+        box-shadow: 0 0 0;
+      }
+
+      .operate {
+        .addtopapers {
+          &:hover {
+            color: #ffa726;
+          } 
+        }
+      }
+    }
+  }
+
+  .manually-papers-content {
+    margin: 0 15px;
+    box-shadow: 0 0 5px;
+    background-color: #fff;
+
+    .manually-papers {
+      padding: 0;
+      background-color: #fff;
+
+      .navbar-wrapper {
+        height: 70px;
+        margin: 0;
+        box-shadow: 0 0 0;
+
+        .papers-title {
+          color: #fff;
+          margin-bottom: 0;
+          padding-left: 45%;
+          display: flex;
+        }
+
+        .createButton {
+          margin-right: 10px;
+        }
+      }
+
+      .index-container {
+        padding: 0;
+
+        .index-table {
+          box-shadow: 0 0 0;
+        }
+
+        .operate {
+          .remove-question {
+            &:hover {
+              color: #d9534f;
+            }
+          }
+        }
+      }
+    }
+
+    .papers-pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      min-height: 45px;
+      margin-top: 20px;
+
+      .page-item {
+        cursor: pointer;
+      }
+    }
+  }
+}

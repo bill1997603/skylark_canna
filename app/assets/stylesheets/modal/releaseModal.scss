@@ -1,0 +1,41 @@
+.release-modal {
+  .modal-content {
+    .modal-body {
+      .modal-body-content {
+        padding-left: 7rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+
+        .cell {
+          margin-bottom: 1rem;
+
+          span:first-child {
+            display: inline-block;
+            min-width: 80px;
+          }
+        }
+
+        .user {
+          .total-number {
+            font-size: .5rem;
+            color: #545454;
+
+            .user-number {
+              min-width: 0;
+            }
+          }
+        } 
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: center;
+
+      .btn-secondary {
+        width: 98px;
+        margin-left: 3rem;
+      }
+    }
+  }
+}

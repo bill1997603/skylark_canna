@@ -1,0 +1,124 @@
+.all-papers-container {
+  .papers-search {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    box-shadow: 0 0 5px #aaaaaa;
+
+    .form-inline {
+      width: 90%;
+      position: relative;
+
+      .fa {
+        position: absolute;
+        left: 9px;
+        top: 20px;
+        color: #cfcfcf;
+      }
+      
+      .form-control {
+        padding: 5px;
+        padding-left: 24px;
+        border-radius: .5rem;
+
+        &::-webkit-input-placeholder {
+          color: #ababab;
+        }
+      }
+    }
+  }
+
+  .prev-papers {
+    height: 30px;
+    padding: 0 3%;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      line-height: 30px;
+    }
+
+    .filter-list {
+      position: absolute;
+      font-size: 16px;
+      background-color: #fff;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #bbb;
+      display: none;
+
+      .filter-top {
+        display: flex;
+        justify-content: center;
+
+        .return-icon {
+          position: absolute;
+          left: 3%;
+        }
+      }
+
+      .filter-middle {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+
+        .filter-cell {
+          flex: 33.33%;
+          text-align: center;
+          padding: 5px 0;
+        }
+      }
+
+      .filter-bottom {
+        text-align: center;
+        line-height: 30px;
+      }
+    }
+  }
+
+  .paper-cell {
+    box-shadow: 0 0 5px #aaaaaa;
+    background-color: #fff;
+    margin-bottom: 15px;
+
+    .running {
+      color: #8bc34a;
+    }
+
+    .closed {
+      color: #e51c23;
+    }
+
+    .cell-top {
+      padding: 3%;
+      border-bottom: 1px solid #bbb;
+
+      .cell-paper-title {
+        display: flex;
+        justify-content: space-between;
+
+        .title-text {
+          font-size: 16px;
+        }
+
+        .test-type {
+          display: flex;
+          align-items: flex-end;
+        }
+      }
+
+      .cell-paper-information {
+        color: #ababab;
+        margin-top: 4px;
+      }
+    }
+
+    .cell-bottom {
+      display: flex;
+      padding: 0 3%;
+      justify-content: space-between;
+    }
+  }
+}

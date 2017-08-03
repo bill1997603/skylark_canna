@@ -1,0 +1,10 @@
+zh-CN:
+  activerecord:
+    errors:
+      models:
+        problem:
+          attributes:
+            description:
+              presence: "描述不能为空"
+        option:
+          description: "描述"

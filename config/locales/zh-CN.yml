@@ -1,0 +1,21 @@
+zh-CN:
+  activerecord:
+    models:
+      problem: 题目
+      option: 选项
+    attributes:
+      problem:
+        description: 描述
+      options:
+        description: 选项的描述
+      paper:
+        deadline: 截止日期
+    errors:
+      messages:
+        blank: 不能为空
+
+      models:
+        paper:
+          attributes:
+            deadline:
+              blank: 不能为空而且要晚于当前时间

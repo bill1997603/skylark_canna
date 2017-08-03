@@ -1,0 +1,14 @@
+#select-organizations {
+  position: absolute;
+  top: 36px;
+  left: 70px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid rgb(92, 179, 253);
+  display: none;
+  z-index: 99;
+
+  .jstree-themeicon {
+    display: none;
+  }
+}

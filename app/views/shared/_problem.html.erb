@@ -1,0 +1,49 @@
+<% if @template_options[:new_record] %>
+  <tr data-id="<%= problem.id %>" class="tr" style="background-color: rgba(255, 228, 196, .5);">
+<% else %>
+  <tr data-id="<%= problem.id %>" class="tr">
+<% end %>
+  <td><%= problem.description %></td>
+  <td><%= problem.form == 1 ? "单选" : "多选" %></td>
+  <% if @template_options[:options] %>
+    <% options = if problem.options.length > 4 %>
+      <% problem.options.first(4) %>
+    <% else %>
+      <% problem.options %>
+    <% end %>
+    <% num_remained_options = 4 - problem.options.length %>
+    <% more_options  = "..." if problem.options.length > 4 %>
+    <% options.each do |option| %>
+      <td><%= option.description %></td>
+    <% end %>
+    <% num_remained_options.times do %>
+      <td></td>
+    <% end %>
+    <td><%= more_options %></td>
+  <% end %>
+  <td><%= tags_list(problem, false) %></td>
+  <td>
+    <div class="operate">
+      <% if @template_options[:actions].include? :edit %>
+        <a class="icon editButton"><i class="fa fa-pencil"></i></a>
+      <% end %>
+      <% if @template_options[:actions].include? :show %>
+        <a class="icon showButton"><i class="fa fa-eye"></i></a>
+      <% end %>
+      <% if @template_options[:actions].include? :delete %>
+        <a class="icon deleteButton" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"></i></a>
+      <% end %>
+      <% if @template_options[:actions].include? :add %>
+        <a class="icon addtopapers"><i class="fa fa-plus"></i></a>
+      <% end %>
+      <% if @template_options[:actions].include? :remove %>
+        <a class="icon remove-question"><i class="fa fa-minus"></i></a>
+      <% end %>
+    </div>
+  </td>
+  <% if @template_options[:scores] %>
+    <td class="problem-score">
+      <%= problem.score %>
+    </td>
+  <% end %>
+</tr>

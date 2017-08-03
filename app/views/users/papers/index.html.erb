@@ -1,0 +1,79 @@
+<div class="all-papers-container">
+  <div class="papers-search">
+    <%= form_tag search_users_papers_url, method: :get, class: "form-inline" do %>
+      <i class="fa fa-search"></i>
+      <%= text_field_tag :q, params[:q], class: "form-control mr-sm-2", placeholder: "搜索" %>
+    <% end %>
+  </div>
+  <div class="prev-papers">
+    <span>往期考试</span>
+    <span class="show-filter"><i class="fa fa-bars"></i></span>
+    <div class="filter-list">
+      <div class="filter-top">
+        <span class="return-icon"><i class="fa fa-arrow-left"></i></span>
+        <span>筛选</span>
+      </div>
+      <div class="filter-middle">
+        <%= link_to "小考", users_papers_url(scale: 1), class: 'filter-cell' %>
+        <%= link_to "进行中", users_papers_url(running: 1), class: 'filter-cell' %>
+        <%= link_to "未参与", users_papers_url(finished: 0), class: 'filter-cell' %>
+        <%= link_to "大考", users_papers_url(scale: 2), class: 'filter-cell' %>
+        <%= link_to "已关闭", users_papers_url(running: 0), class: 'filter-cell' %>
+        <%= link_to "已完成", users_papers_url(finished: 1), class: 'filter-cell' %>
+      </div>
+      <div class="filter-bottom">
+        <%= link_to "重置", users_papers_url %>
+      </div>
+    </div>
+  </div>
+  <% @papers.each do |paper| %>
+    <% finished = finished?(paper) %>
+    <% if finished %>
+      <div class="paper-cell" data-id="<%= paper.id %>">
+    <% else %>
+      <div class="paper-cell" data-code="<%= paper.code %>">
+    <% end %>
+      <div class="cell-top">
+        <div class="cell-paper-title">
+          <span class="title-text">
+            <%= paper.title %>
+          </span>
+          <span class="test-type running">
+            <%= paper.scale == 1 ? '小考' : '大考' %>
+          </span>
+        </div>
+        <div class="cell-paper-information">
+          <span>发布者：</span>
+          <span>渠道小助手</span>
+        </div>
+        <div class="cell-paper-information">
+          <span>题目数：</span>
+          <span>
+            <%= paper.assigns.count %>
+          </span>
+        </div>
+        <div class="cell-paper-information">
+          <span>总分：</span>
+          <span>
+            <%= paper.assigns.sum(:problem_score) %>
+          </span>
+        </div>
+        <div class="cell-paper-information">
+          <span>试卷关闭时间：</span>
+          <span>
+            <%= display_time(paper.deadline) %>
+          </span>
+        </div>
+      </div>
+      <div class="cell-bottom">
+        <% over = Time.now > paper.deadline %>
+        <span class="<%= over ? 'closed' : 'running' %>">
+          <%= over ? '已结束' : '进行中' %>
+        </span>
+        <span class="<%= finished ? 'running' : 'closed' %>">
+          <%= finished ? '已完成' : '未参与' %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>

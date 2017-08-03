@@ -1,0 +1,61 @@
+<div class="modal-dialog modal-content-wrapper" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title-wrapper">
+        <h5 class="modal-title" id="createModalLabel">添加题目</h5>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= form_for ([:admin, @problem]), remote: true, html: { class: "modal-body-wrapper"} do |f| %>
+      <div class="modal-body">
+        <div class="error-message"></div>
+        <div class="type-title-wrapper">
+          <div class="create-prob-type prob-type">
+            <span class="prob-type-text">题型：</span>
+            <label class="custom-control custom-radio">
+              <%= f.radio_button :form, 1, class: "custom-control-input single radio" %>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">单选</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <%= f.radio_button :form, 2, class: "custom-control-input radio" %>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">多选</span>
+            </label>
+          </div>
+          <div class="create-prob-title prob-title">
+            <span class="create-prob-title-text">题目：</span>
+            <%= f.text_area :description, class: "form-control prob-title-content", rows: 3 %>
+          </div>
+        </div>
+        <div class="options-tag-wrapper">
+          <div class="answer">
+            <span class="answer-text">正确答案</span>
+          </div>
+          <div class="prob-options create-prob-options">
+            <ol type="A">
+              <%= f.fields_for :options do |f| %>
+                <%= render 'option', f: f %>
+              <% end %>
+            </ol>
+          </div>
+          <div class="add-option">
+            <%= link_to_add_fields "增加选项", f, :options, {partial: 'option'}, {class: "btn btn-success"} %>
+          </div>
+          <div class="select2-tags create-select-tags">
+            <span class="prob-label-text">标签：</span>
+            <select class="select2 js-tags form-control" multiple="multiple">
+            </select>
+          </div>
+        </div>
+        <input type="text" id="create-label-input" name="problem[tags_list]" style="display: none">
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "添加", class: "btn btn-primary create-submit" %>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+      </div>
+    <% end %>
+  </div>
+</div>

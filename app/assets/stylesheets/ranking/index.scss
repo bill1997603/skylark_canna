@@ -1,0 +1,64 @@
+.ranking-tab {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-bottom: 2px solid #E8E8E8;
+  border-top: 2px solid #E8E8E8;
+  align-items: center;
+
+  .page-header {
+    margin-bottom: 0!important;
+    border: none!important;
+  }
+}
+.papers-list-wrapper {
+
+  .navbar-ranking-wrapper {
+    background-color: #fff;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .ranking-navbar-wrapper {
+    background-color: #fff;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .nav-pills {
+      width: 350px;
+      border: 1px solid #0275d8;
+      margin-left: 20px;
+      height: 100%;
+      font-size: 14px;
+      border-radius: 5px;
+
+      .nav-item {
+        border-right: 1px solid #0275d8;
+        .nav-link {
+          border-radius: 0;
+          padding: .4em 1em;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    .export-ranking {
+      margin-right: 3rem;
+      width: 210px;
+    }
+    .push-ranking {
+      margin-right: 1rem;
+    }
+  }
+
+  .index-table {
+    box-shadow: 0 0 0 !important;
+  }
+}

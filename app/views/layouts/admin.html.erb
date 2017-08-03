@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canna</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="out-container">
+      <div class="row">
+        <div class="sidebar">
+          <div class="sidebar-logo">
+            <span class="logo-wrapper"></span>
+            <span class="logo-description">存储互联</span>
+          </div>
+          <nav class="nav flex-column">
+            <a class="nav-link<%= " active" if @nav_options[:problems] %>" href="/admin/problems">题库</a>
+            <a class="nav-link<%= " active" if @nav_options[:new_paper] %>" href="/admin/papers/dash">发布考试</a>
+            <a class="nav-link<%= " active" if @nav_options[:past_papers] %>" href="/admin/papers">往期考试</a>
+            <a class="nav-link<%= " active" if @nav_options[:ranking] %>" href="/admin/ranking">考试排行</a>
+            <%= link_to "退出系统", admin_logout_url, method: :delete, class: "nav-link" %>
+          </nav>
+        </div>
+        <div class="main">
+          <div class="top-divider"></div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <% include_rails_script %>
+  </body>
+</html>

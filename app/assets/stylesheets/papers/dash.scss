@@ -1,0 +1,44 @@
+.set-prob {
+  margin-right: 15px;
+  margin-left: 15px;
+  box-shadow: 0 0 5px;
+  background-color: #fff;
+  margin-bottom: 30px;
+
+  .set-prob-top {
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 60px;
+    border-bottom: 1px solid #bababa;
+  }
+
+  .set-prob-content {
+    height: 98px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .btn {
+      font-size: 16px;
+      height: 40px;
+      width: 92px;
+      border-radius: 6px;
+    }
+
+    .btn-randomly {
+      margin-right: 300px;
+    }
+
+    .btn-manually {
+      border: 1px solid #bababa;
+    }
+  }
+}
+
+.index-container {
+  .papers-index-table {
+    min-height: 360px !important;
+  }
+}
+

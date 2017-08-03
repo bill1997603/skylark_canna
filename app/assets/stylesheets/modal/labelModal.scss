@@ -1,0 +1,25 @@
+.label-modal {
+  .modal-body {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .single-select-tag {
+      display: flex;
+      align-items: center;
+
+      &>:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .modal-footer {
+    justify-content: space-around;
+
+    .btn {
+      padding: .5rem 2rem;
+    }
+  }
+}

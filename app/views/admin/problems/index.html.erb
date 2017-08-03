@@ -1,0 +1,11 @@
+<% if @remote %>
+  <% @template_options = { options: true,
+                           actions: [:show, :edit, :delete] } %>
+<% else %>
+  <% @template_options = { options: true,
+                           navbar: [:search, :create, :import],
+                           actions: [:show, :edit, :delete] } %>
+<% end %>
+
+<h3 class="page-header">题库</h3>
+<%= render partial: "shared/problems", object: @problems %>

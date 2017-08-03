@@ -1,0 +1,86 @@
+<div class="users-papers-container">
+  <div class="users-papers-header">
+    <div class="header-left">
+      <div class="users-papers-title">
+        <%= @paper.title %>
+      </div>
+      <div class="papers-information">
+        <div class="information-cell">
+          <span>发布者：</span>
+          <span>渠道小助手</span>
+        </div>
+        <div class="information-cell">
+          <span>考试类型：</span>
+          <span>
+            <%= @paper.scale == 1 ? '小考' : '大考' %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>题目数：</span>
+          <span>
+            <%= @paper.problems.count %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>总分：</span>
+          <span>
+            <%= @paper.assigns.sum(:problem_score) %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>试卷关闭时间：</span>
+          <span>
+            <%= display_time(@paper.deadline) %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <% finished = finished?(@paper) %>
+      <span class="head-icon">
+        <i class="fa <%= finished ? 'fa-check-square-o running' : 'fa-file-text-o' %>"></i>
+      </span>
+      <span class="papers-status running">
+        <% if finished %>
+          已完成
+        <% else %>
+          进行中
+        <% end %>
+      </span>
+    </div>
+  </div>
+  <% if finished %>
+    <div class="score-list">
+      <div class="score-list-title">
+        <span>得分</span>
+      </div>
+      <div class="score-text">
+        <% if @paper.scale == 1 %>
+          <span class="score-number running">
+            <%= @enroll.score %>
+          </span>
+        <% else %>
+          <% failed = failed?(@enroll) %>
+          <span class="score-number <%= failed ? 'closed' : 'running' %>">
+            <%= @enroll.score %>
+          </span>
+          <span class="unqualified <%= failed ? 'closed' : 'running' %>">
+            <%= failed ? '不合格' : '合格' %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="individual-ranking">
+      <span>排名</span>
+      <span class="ranking-number"><%= @rank %></span>
+      <%= link_to '查看本次考试排名', ranking_users_paper_url(@paper), class: 'btn' %>
+      <span class="ranking-explain">
+        排名为实时显示,最终排名以试卷关闭后为准
+      </span>
+    </div>
+    <div class="users-papers-button-group">
+      <%= link_to "返回试卷", detail_users_paper_url(@paper), class: 'btn return' %>
+      <%= link_to "往期试卷", users_papers_url, class: 'btn show-allpapers' %>
+    </div>
+  <% end %>
+</div>

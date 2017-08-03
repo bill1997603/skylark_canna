@@ -1,0 +1,59 @@
+<div class="papers-list-wrapper">
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-light">
+      <%= form_tag users_admin_paper_url(@paper), method: :get, class: "form-inline",id: "submit-search" do %>
+        <i class="fa fa-search search"></i>
+        <%= text_field_tag :q, params[:q], class: "form-control mr-sm-2", id: "search-input", autocomplete: "off" %>
+        <%= other_params_field %>
+      <% end %>
+    </nav>
+    <div class="navbar-right">
+      <% if params[:rank] %>
+        <%= link_to "下载导出得分排名", export_admin_paper_url(params[:id]), class: "btn btn-info download-list", data: { turbolinks: false } %>
+      <% end %>
+      <%= link_to "将成绩与排名推送给用户", ranking_admin_paper_url, method: :post, class: "btn btn-success push-score" %>
+      <% if @paper.scale == 2 && params[:failed] %>
+        <%= link_to "对不合格人员推送再次考试", repush_admin_paper_url(params[:id]), method: :post, class: "btn btn-info download-list", data: { turbolinks: false } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="container-wrapper">
+    <div class="container name-list-container">
+      <table class="table table-hover table-bordered table-striped index-table">
+        <thead>
+          <tr class="tr">
+            <% if params[:rank] %>
+              <td>排名</td>
+            <% end %>
+            <td>姓名</td>
+            <td>公司名称</td>
+            <td>得分</td>
+            <td>完成时间</td>
+          </tr>
+        </thead>
+        <tbody id="listdata">
+          <% @enrolls.each_with_index do |enroll, i| %>
+            <tr class="tr">
+              <% if params[:rank] %>
+                <td>
+                  <%= rank_of(i) %>
+                </td>
+              <% end %>
+              <td><%= enroll.user.name %></td>
+              <td><%= enroll.user.organizations.first.name %></td>
+              <td class="score"><%= enroll.score %></td>
+              <td><%= display_time(enroll.hand_in_time) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-wrapper">
+      <%= paginate @enrolls %>
+    </div>
+  </div>
+</div>
+<div class="return-papers-list">
+  <a class="btn btn-primary" onclick="javascript:history.back(-1)">返回</a>
+</div>

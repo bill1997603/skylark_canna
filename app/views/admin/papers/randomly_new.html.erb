@@ -1,0 +1,114 @@
+<h3 class="page-header">发布考试</h3>
+<div class="set-prob set-papers">
+  <div class="set-prob-top"></div>
+  <div class="set-papers-content">
+    <%= form_for ([:admin, @paper]), html: { class: "paper_form" } do |f| %>
+      <div class="papers-type">
+        <span>考试类型：</span>
+        <label class="custom-control custom-radio">
+          <%= f.radio_button :scale, 1, class: "custom-control-input small-test", checked: true %>
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">小考</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <%= f.radio_button :scale, 2, class: "custom-control-input large-test" %>
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">大考</span>
+        </label>
+      </div>
+      <div class="papers-information-wrapper">
+        <div class="papers-information-left">
+          <div class="papers-name">
+            <div class="name">
+              <span>试卷名称：</span>
+              <%= f.text_field :title, class: "form-control papers-name-val" %>
+            </div>
+          </div>
+          <div class="papers-user">
+            <span>考生选择：</span>
+            <div class="user-range" tabindex="0" hidefocus="true">
+              <span class="user-overflow-text" style="display: none;">等组织...</span>
+              <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
+            </div>
+            <div id="select-organizations"></div>
+          </div>
+        </div>
+        <div class="papers-information-right">
+          <div class="qualified-score">
+            <div class="score" style="display: none;">
+              <span>合格分数：</span>
+              <input type="text" class="form-control papers-score-val" placeholder="如未填写，合格分数为总分的60%" onkeyup="value=value.replace(/[^\d\.]/g,'')">
+            </div>
+          </div>
+          <div class="papers-closetime">
+            <span>试卷关闭时间：</span>
+            <input type="text" id="datetimepicker" class="form-control" name="paper[deadline]" readonly data-date-format="yyyy-mm-dd hh:ii">
+            <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
+          </div>
+        </div>
+      </div>
+      <%= f.hidden_field :problems_list, id: "problems_list" %>
+      <%= f.hidden_field :orgs_list, id: "orgs_list" %>
+    <% end %>
+  </div>
+</div>
+
+<% @template_options = { navbar: [], navbar_title: "试卷", nopager: true, scores: true, options: true,
+                         actions: [:edit, :show] } %>
+<%= render partial: "shared/problems", object: @problems %>
+
+<div class="release-test">
+  <button class="btn btn-primary releaseButton" data-toggle="modal" data-target="#releaseModal">发布考试</button>
+</div>
+<div class="modal fade label-modal" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="labelModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade release-modal" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <div class="modal-title-wrapper">
+          <h5 class="modal-title" id="releaseModalLabel">确认发布</h5>
+         </div>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <form class="modal-body-wrapper">
+         <div class="modal-body">
+           <div class="modal-body-content">
+             <div class="papers-name cell">
+               <span>试卷名称：</span>
+               <span class="name-content"></span>
+             </div>
+             <div class="papers-type cell">
+               <span>考试类型：</span>
+               <span class="type-content"></span>
+             </div>
+             <div class="user cell">
+               <span>考生：</span>
+               <span class="user-range-content"></span>
+               <span class="overflow-text" style="display: none;">等组织...</span>
+               <span class="total-number">共计<span class="user-number">50</span>人</span>
+             </div>
+             <div class="prob-number cell">
+               <span>题目数：</span>
+               <span class="prob-number-content"></span>
+             </div>
+             <div class="papers-totalscore cell">
+               <span>试卷总分：</span>
+               <span class="total-scores"></span>
+             </div>
+             <div class="papers-closetime cell">
+               <span>试卷关闭时间：</span>
+               <span class="papers-close-time"></span>
+             </div>
+           </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="publish_paper">确认发布</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+         </div>
+       </form>
+     </div>
+  </div>
+</div>

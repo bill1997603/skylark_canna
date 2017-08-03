@@ -1,0 +1,50 @@
+<div class="ranking-tab">
+  <h3 class="page-header">公司排名</h3>
+</div>
+<div class="papers-list-wrapper">
+  <div class="ranking-navbar-wrapper">
+    <ul class="nav nav-pills nav-fill ">
+      <li class="nav-item">
+        <a class="nav-link<%= ' active' if params[:period] == 'month' %>" href="/admin/ranking/company?period=month">月排名</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link<%= ' active' if params[:period] == 'quarter' %>" href="/admin/ranking/company?period=quarter">季度排名</a>
+      </li>
+    </ul>
+    <div class="ranking-btn-group">
+      <%= link_to_export_company params[:period], "导出排名", class: "btn btn-secondary export-ranking", data: { turbolinks: false } %>
+      <%= link_to "将成绩与排名推送给用户", admin_ranking_company_push_url(period: params[:period]), method: :post, class: "btn btn-secondary push-ranking" %>
+    </div>
+  </div>
+  <div class="container-wrapper">
+    <div class="container name-list-container">
+      <table class="table table-hover table-bordered table-striped index-table">
+        <thead>
+          <tr class="tr">
+            <td>排名</td>
+            <td>公司名称</td>
+            <td>参考次数</td>
+            <td>总得分</td>
+          </tr>
+        </thead>
+        <tbody id="listdata">
+          <% @organizations.each_with_index do |org, i| %>
+            <tr>
+              <td><%= rank_of(i) %></td>
+              <td><%= org.name %></td>
+              <td><%= num_of_references_of_company(org, params[:period].to_sym) %></td>
+              <td><%= score_of_company(org, params[:period].to_sym) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-wrapper">
+      <%= paginate @organizations %>
+    </div>
+  </div>
+</div>
+<div class="return-papers-list">
+  <a class="btn btn-primary btn-lg" href="/admin/ranking">返回</a>
+</div>

@@ -1,0 +1,117 @@
+<div class="users-papers-container">
+  <div class="users-papers-header">
+    <div class="header-left">
+      <div class="users-papers-title">
+        <%= @paper.title %>
+      </div>
+      <div class="papers-information">
+        <div class="information-cell">
+          <span>发布者：</span>
+          <span>渠道小助手</span>
+        </div>
+        <div class="information-cell">
+          <span>考试类型：</span>
+          <span>
+            <%= @paper.scale == 1 ? '小考' : '大考' %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>题目数：</span>
+          <span>
+            <%= @paper.problems.count %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>总分：</span>
+          <span>
+            <%= @paper.assigns.sum(:problem_score) %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>试卷关闭时间：</span>
+          <span>
+            <%= display_time(@paper.deadline) %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="head-icon">
+        <i class="fa fa-check-square-o running "></i>
+      </span>
+      <span class="papers-status running">已完成</span>
+    </div>
+  </div>
+  <div class="users-papers-header" style="display: none;">
+    <div class="header-left">
+      <div class="users-papers-title">
+        个人周排名
+      </div>
+      <div class="papers-information">
+        <div class="information-cell">
+          <span>排名类型：</span>
+          <span>
+            111
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>参考人数：</span>
+          <span>
+            111
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>总分：</span>
+          <span>
+            111
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>时间：</span>
+          <span>
+            111
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="head-icon cchl-icon">
+      </span>
+    </div>
+  </div>
+  <div class="ranking-list">
+    <table class="table table-hover table-bordered table-striped ranking-table">
+      <thead>
+        <tr class="tr">
+          <td>排名</td>
+          <td>姓名</td>
+          <td>得分</td>
+          <td>公司</td>
+        </tr>
+      </thead>
+      <tbody id="listdata">
+        <% @enrolls.each_with_index do |enroll, i| %>
+          <% user = enroll.user %>
+          <tr class="tr">
+            <td><%= rank_of(i) %></td>
+            <td><%= user.name %></td>
+            <td><%= enroll.score %></td>
+            <td><%= user.organizations.first.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="users-papers-footer">
+    <a class="btn btn-danger" href="<%= users_paper_url(@paper) %>"
+      <i class="fa fa-undo"></i>
+      <span>返回成绩</span>
+    </a>
+    <div class="papers-search" style="display: none;">
+      <form class="form-inline">
+        <i class="fa fa-search"></i>
+        <input class="form-control mr-sm-2" type="text" placeholder="搜索姓名" aria-label="Search">
+      </form>
+    </div>
+  </div>
+</div>

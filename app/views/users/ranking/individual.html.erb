@@ -1,0 +1,75 @@
+<div class="users-papers-container">
+  <div class="users-papers-header">
+    <div class="header-left">
+      <div class="users-papers-title">
+        <%= 
+          case params[:period]
+          when "week"
+            "个人周排名"
+          when "month"
+            "个人月排名"
+          when "quarter"
+            "个人季度排名"
+          end
+        %>
+      </div>
+      <div class="papers-information">
+        <div class="information-cell">
+          <span>排名类型：</span>
+          <span>
+            <%= 
+              case params[:period]
+              when "week"
+                "周排名"
+              when "month"
+                "月排名"
+              when "quarter"
+                "季度排名"
+              end
+            %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>参考人数：</span>
+          <span>
+            <%= @users.length %>
+          </span>
+        </div>
+        <div class="information-cell">
+          <span>时间：</span>
+          <span>
+            <%= display_time(Time.now) %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="head-icon cchl-icon">
+      </span>
+    </div>
+  </div>
+  <div class="ranking-list">
+    <table class="table table-hover table-bordered table-striped ranking-table">
+      <thead>
+        <tr class="tr">
+          <td>排名</td>
+          <td>姓名</td>
+          <td>参考次数</td>
+          <td>得分</td>
+          <td>公司</td>
+        </tr>
+      </thead>
+      <tbody id="listdata">
+        <% @users.each_with_index do |user, i| %>
+          <tr class="tr">
+            <td><%= rank_of(i) %></td>
+            <td><%= user.name %></td>
+            <td><%= num_of_references(user, params[:period].to_sym) %>
+            <td><%= score(user, params[:period].to_sym) %></td>
+            <td><%= user.organizations.first.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

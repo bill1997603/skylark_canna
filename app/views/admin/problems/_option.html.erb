@@ -1,0 +1,14 @@
+<li>
+  <div class="form-group row">
+    <label class="custom-control custom-checkbox">
+      <%= f.check_box :right, class: (f.object.persisted? ? "custom-control-input edit-checkbox" : "custom-control-input checkbox") %>
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description"></span>
+    </label>
+    <%= f.text_field :description, class: "form-control option-content" %>
+    <span class="removeOption">X</span>
+    <% if f.object.persisted? %>
+      <%= f.check_box :_destroy, class: "destroy", style: "display: none" %>
+    <% end %>
+  </div>
+</li>

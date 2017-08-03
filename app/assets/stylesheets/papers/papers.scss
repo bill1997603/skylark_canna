@@ -1,0 +1,108 @@
+.running {
+  color: #8bc34a;
+}
+
+.closed {
+  color: #fe0000;
+}
+
+.hidden {
+  display: none;
+}
+
+.papers-list-wrapper {
+  margin: 0 15px;
+  box-shadow: 0 0 5px;
+  background-color: #fff;
+  margin-bottom: 20px;
+
+  .navbar-wrapper {
+    box-shadow: 0 0 0 !important;
+    margin: 0 !important;
+  }
+}
+.papers-container {
+  border-top: 1px solid #bababa;
+
+  .papers-card {
+    .card-top {
+      margin-bottom: 24px;
+      min-height: 30px;
+
+      .card-title {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0;
+
+        .title-wrapper {
+          .title-text {
+            font-size: 18px;
+          }
+        }
+
+        .paper-status {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+      }
+
+      .paper-deadline {
+        color: #999;
+      }
+    }
+
+    .card-bottom {
+      color: #999;
+      display: flex;
+      font-size: 14px;
+
+      .card-bottom-right {
+        margin-left: 24px;
+      }
+    }
+
+    .card-bottom-information {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      width: 100%;
+
+      .information-icon {
+        .fa {
+          font-size: 50px;
+        }
+      }
+
+      .information-text {
+        font-size: 28px;
+      }
+    }
+  }
+}
+.card-wrapper {
+  padding-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  .card-cell {
+    min-height: 175px;
+    flex: 0 0 28%;
+    margin: 0px 2.65%;
+    margin-top: 3rem;
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid #999;
+    border-radius: 6px;
+  }
+
+  .individual-ranking,
+  .company-ranking {
+    display: flex;
+    align-items: center;
+
+    .information-icon {
+      margin-right: 3rem;
+    }
+  }
+}

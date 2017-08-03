@@ -1,0 +1,14 @@
+<div class="select-organizations-wrapper">
+  <div class="icon-wrapper">
+    <span class="icon-container"></span>
+  </div>
+  <%= form_tag users_organizations_path, method: :post do |f| %>
+    <div class="content">
+      <span class="text">请选择所属公司</span>
+      <%= select_tag "company", options_from_collection_for_select(@organizations, "id", "name"), class: "users-select-organizations" %>
+    </div>
+    <div class="select-organizations-footer">
+      <%= submit_tag "确认", class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>

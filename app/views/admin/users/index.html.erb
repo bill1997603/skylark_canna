@@ -1,0 +1,16 @@
+<div class="paper-users-header">
+  <h3 class="information-title"><%= @paper.title %></h3>
+  <h3 class="users-list">
+    <% if params[:status] == "0" %>
+      已完成名单
+    <% elsif params[:status] == "1" %>
+      未完成名单
+    <% elsif params[:failed] == "1" %>
+      不合格名单
+    <% else %>
+      得分排名
+    <% end %>
+  </h3>
+</div>
+
+<%= render partial: "users" %>
